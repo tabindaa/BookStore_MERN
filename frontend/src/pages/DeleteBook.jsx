@@ -1,11 +1,12 @@
-import React from 'react'
+import BackButton from "../components/BackButton";
 
 const DeleteBook = () => {
   return (
     <div>
-      
+      <BackButton />
+      DeleteBook
     </div>
-  )
-}
+  );
+};
 
-export default DeleteBook
+export default DeleteBook;

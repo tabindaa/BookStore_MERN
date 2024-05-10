@@ -9,16 +9,14 @@ import Spinner from "../components/Spinner";
 
 const Home = () => {
   const [loading, setLoading] = useState(false);
-  const [books, setBooks] = useState([
-    { _id: 123, title: "dsvd", author: "fvfvfd", publishYear: 1999 },
-  ]);
+  const [books, setBooks] = useState([]);
 
   useEffect(() => {
     setLoading(true);
     axios
       .get("http://localhost:5555/books")
       .then((response) => {
-        // setBooks(response.data?.data);
+        setBooks(response.data?.data);
         console.log(books);
         setLoading(false);
       })
@@ -39,7 +37,7 @@ const Home = () => {
         ) : (
           <table className="w-full bordder-seperate border-spacing-2">
             <thead>
-              <tr>
+              <tr className="text-gray-700">
                 <th className="border border-slate-600 rounded-md">No</th>
                 <th className="border border-slate-600 rounded-md">Title</th>
                 <th className="border border-slate-600 rounded-md max-md:hidden">
@@ -54,12 +52,12 @@ const Home = () => {
               </tr>
             </thead>
             <tbody>
-              {books.map((book, index) => {
-                <tr key={book._id} className="h-8">
+              {books.map((book, index) => (
+                <tr key={book._id} className="h-8 text-gray-600">
                   <td className="border border-slate-700 rounded-md text-center">
                     {index + 1}
                   </td>
-                  <td className="border border-slate-700 rounded-md text-center">
+                  <td className="border border-slate-700  rounded-md text-center">
                     {book.title}
                   </td>
                   <td className="border border-slate-700 rounded-md text-center max-md:hidden">
@@ -71,18 +69,18 @@ const Home = () => {
                   <td className="border border-slate-700 rounded-md text-center">
                     <div className="flex justify-center gap-x-4">
                       <Link to={`/books/details/${book._id}`}>
-                        <BsInfoCircle className="text-2xl text-green-800"></BsInfoCircle>
+                        <BsInfoCircle className="text-2xl text-green-800" />
                       </Link>
                       <Link to={`/books/edit/${book._id}`}>
-                        <AiOutlineEdit className="text-2xl text-yellow-600"></AiOutlineEdit>
+                        <AiOutlineEdit className="text-2xl text-yellow-600" />
                       </Link>
                       <Link to={`/books/delete/${book._id}`}>
-                        <MdOutlineDelete className="text-2xl text-red-600"></MdOutlineDelete>
+                        <MdOutlineDelete className="text-2xl text-red-600" />
                       </Link>
                     </div>
                   </td>
-                </tr>;
-              })}
+                </tr>
+              ))}
             </tbody>
           </table>
         )}
