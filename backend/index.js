@@ -2,9 +2,10 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 
-import { PORT, mongoDBURL } from "./config.js";
+import { PORT } from "./config.js";
 import booksRoute from "./routes/booksRoute.js";
-
+import * as dotenv from "dotenv";
+dotenv.config();
 const app = express();
 
 //Middleware for parsing request body
@@ -26,7 +27,7 @@ app.get("/", (req, res) => {
 });
 
 mongoose
-  .connect(mongoDBURL)
+  .connect(process.env.URI)
   .then(() => {
     console.log("App connected to DB");
     app.listen(PORT, () => {
